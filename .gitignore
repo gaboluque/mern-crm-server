@@ -1,0 +1,25 @@
+# npm packages
+node_modules
+
+# Environment variables
+.env
+
+# IDE Files
+.vscode
+.idea
+
+# API Documentation
+src/config/doc/api/
+
+# tmp folder
+tmp/*
+
+# build folder
+build/*
+
+# dist folder
+dist
+
+# logs
+.logs
+logs
