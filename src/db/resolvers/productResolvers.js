@@ -1,53 +1,37 @@
-import Product from '../models/Product';
+import productCreator from '../../services/productServices/productCreator';
+import productDeleter from '../../services/productServices/productDeleter';
+import productsFetcher from '../../services/productServices/productsFetcher';
+import productShower from '../../services/productServices/productShower';
+import productUpdater from '../../services/productServices/productUpdater';
 
 const getProducts = async () => {
-  const products = await Product.find({});
+  const products = await productsFetcher();
   return products;
 };
 
 const getProduct = async (_, { id }) => {
-  const product = await Product.findById(id);
-  if (!product) throw new Error('Producto no encontrado');
+  const product = await productShower(id);
   return product;
 };
 
 const searchProduct = async (_, { text }) => {
-  const products = await Product.find({ $text: { $search: text } });
+  const products = await productsFetcher({ $text: { $search: text } });
   return products;
 };
 
 const newProduct = async (_, { input }) => {
-  try {
-    const product = new Product(input);
-    const response = await product.save();
-    return response;
-  } catch (e) {
-    throw new Error(e);
-  }
+  const result = await productCreator(input);
+  return result;
 };
 
 const updateProduct = async (_, { id, input }) => {
-  try {
-    let product = await Product.findById(id);
-    if (!product) throw new Error('Producto no encontrado');
-    product = await Product.findOneAndUpdate({ _id: id }, input, {
-      new: true,
-    });
-    return product;
-  } catch (e) {
-    throw new Error(e);
-  }
+  const product = await productUpdater(id, input);
+  return product;
 };
 
 const deleteProduct = async (_, { id }) => {
-  try {
-    const product = await Product.findById(id);
-    if (!product) throw new Error('Producto no encontrado');
-    await Product.findByIdAndDelete({ _id: id });
-    return 'Producto eliminado';
-  } catch (e) {
-    throw new Error(e);
-  }
+  await productDeleter(id);
+  return 'Producto eliminado';
 };
 
 export const productQueries = { getProducts, getProduct, searchProduct };
