@@ -14,6 +14,11 @@ const userSchema = gql`
     token: String
   }
 
+  type Auth {
+    token: String
+    user: User
+  }
+
   type TopSeller {
     total: Float
     seller: [User]
@@ -42,7 +47,9 @@ const userSchema = gql`
   extend type Mutation {
     # Users
     newUser(input: UserInput): User
-    authUser(input: AuthInput): Token
+    authUser(input: AuthInput): Auth
+
+    verifyToken: User
   }
 `;
 
