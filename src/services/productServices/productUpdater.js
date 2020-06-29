@@ -1,10 +1,14 @@
 import Product from '../../db/models/Product';
+import productShower from './productShower';
+
+const verifyBusinessRules = async (productId) => {
+  await productShower(productId);
+};
 
 export default async (_id, productDTO) => {
+  await verifyBusinessRules(_id);
   try {
-    let product = await Product.findById(_id);
-    if (!product) throw new Error('Producto no encontrado');
-    product = await Product.findOneAndUpdate({ _id }, productDTO, {
+    const product = await Product.findOneAndUpdate({ _id }, productDTO, {
       new: true,
     });
     return product;

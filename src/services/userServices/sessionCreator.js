@@ -8,15 +8,20 @@ const createToken = ({ id, email, name, lastName }, expiresIn) => {
   });
 };
 
-export default async (auth) => {
-  const foundUser = await User.findOne({ email: auth.email });
+const verifyBusinessRules = async ({ email, password }) => {
+  const foundUser = await User.findOne({ email });
   if (!foundUser) throw new Error('El usuario no existe');
 
-  const validPassword = bcryptjs.compareSync(auth.password, foundUser.password);
+  const validPassword = bcryptjs.compareSync(password, foundUser.password);
   if (!validPassword) throw new Error('Contraseña incorrecta');
 
+  return foundUser;
+};
+
+export default async (auth) => {
+  const user = await verifyBusinessRules(auth);
   return {
-    token: createToken(foundUser, 60 * 60),
-    user: foundUser,
+    token: createToken(user, 60 * 60),
+    user,
   };
 };
