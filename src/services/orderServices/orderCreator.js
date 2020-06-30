@@ -1,5 +1,4 @@
 import { verifyItemQuantity } from '../../business/verifiers/orderVerifiers';
-import Client from '../../db/models/Client';
 import Order from '../../db/models/Order';
 import clientShower from '../clientServices/clientShower';
 

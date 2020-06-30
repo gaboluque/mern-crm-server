@@ -1,8 +1,7 @@
-import Client from '../../db/models/Client';
-import Order from '../../db/models/Order';
-import orderShower from './orderShower';
 import { verifyItemQuantity } from '../../business/verifiers/orderVerifiers';
+import Order from '../../db/models/Order';
 import clientShower from '../clientServices/clientShower';
+import orderShower from './orderShower';
 
 const verifyBusinessRules = async (orderId, orderDTO, userId) => {
   await orderShower(orderId);
