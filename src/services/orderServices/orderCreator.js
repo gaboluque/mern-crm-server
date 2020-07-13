@@ -15,10 +15,12 @@ export default async (orderDTO, currentUser) => {
   await verifyBusinessRules(orderDTO, currentUser.id);
 
   try {
-    const order = Order(orderDTO);
+    const order = new Order(orderDTO);
     order.seller = currentUser.id;
     const result = await order.save();
-    return result;
+    const client = await clientShower(result.client);
+    order.client = client;
+    return order;
   } catch (e) {
     throw new Error(e);
   }

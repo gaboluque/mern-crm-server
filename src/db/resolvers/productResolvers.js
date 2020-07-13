@@ -31,7 +31,7 @@ const updateProduct = async (_, { id, input }) => {
 
 const deleteProduct = async (_, { id }) => {
   await productDeleter(id);
-  return 'Producto eliminado';
+  return { id };
 };
 
 export const productQueries = { getProducts, getProduct, searchProduct };

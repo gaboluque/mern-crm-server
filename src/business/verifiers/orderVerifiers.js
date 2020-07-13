@@ -4,7 +4,7 @@ const verifyItemQuantity = async ({ id, quantity }) => {
   const product = await Product.findById(id);
 
   if (quantity > product.stock) {
-    throw new Error(`Item ${product.name} exceeds stock`);
+    throw new Error(`Item ${product.name} exceeds stock (${product.stock})`);
   } else {
     product.stock -= quantity;
     await product.save();

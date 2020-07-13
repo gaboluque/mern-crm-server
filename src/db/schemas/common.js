@@ -9,6 +9,10 @@ const commonSchema = gql`
   type Mutation {
     root: String
   }
+
+  type IdObject {
+    id: ID
+  }
 `;
 
 export default commonSchema;

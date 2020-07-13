@@ -2,6 +2,7 @@ import orderCreator from '../../services/orderServices/orderCreator';
 import ordersFetcher from '../../services/orderServices/ordersFetcher';
 import orderShower from '../../services/orderServices/orderShower';
 import orderUpdater from '../../services/orderServices/orderUpdater';
+import orderDeleter from '../../services/orderServices/orderDeleter';
 
 const getOrders = async () => {
   const orders = await ordersFetcher();
@@ -38,6 +39,11 @@ const updateOrder = async (_, { id, input }, { user }) => {
   return order;
 };
 
+const deleteOrder = async (_, { id }, { user }) => {
+  await orderDeleter(id, user);
+  return { id };
+};
+
 export const orderQueries = {
   getOrders,
   getSellerOrders,
@@ -49,4 +55,5 @@ export const orderQueries = {
 export const orderMutations = {
   newOrder,
   updateOrder,
+  deleteOrder,
 };

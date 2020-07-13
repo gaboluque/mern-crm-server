@@ -27,7 +27,7 @@ const productSchema = gql`
     # Products
     newProduct(input: ProductInput): Product
     updateProduct(id: ID!, input: ProductInput): Product
-    deleteProduct(id: ID!): String
+    deleteProduct(id: ID!): IdObject
   }
 `;
 

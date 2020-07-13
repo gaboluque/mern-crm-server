@@ -5,13 +5,15 @@ const orderSchema = gql`
   type OrderProduct {
     id: ID
     quantity: Int
+    name: String
+    price: Float
   }
 
   type Order {
     id: ID
     order: [OrderProduct]
     total: Float
-    client: ID
+    client: Client
     seller: ID
     status: OrderStatus
     createdAt: String
@@ -21,6 +23,8 @@ const orderSchema = gql`
   input OrderProductInput {
     id: ID!
     quantity: Int!
+    name: String!
+    price: Float!
   }
 
   enum OrderStatus {
@@ -49,6 +53,7 @@ const orderSchema = gql`
     # Orders
     newOrder(input: OrderInput): Order
     updateOrder(id: ID!, input: OrderInput): Order
+    deleteOrder(id: ID!): IdObject
   }
 `;
 

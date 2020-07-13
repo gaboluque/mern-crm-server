@@ -21,7 +21,7 @@ export default async (_id, orderDTO, currentUser) => {
   try {
     const order = await Order.findOneAndUpdate({ _id }, orderDTO, {
       new: true,
-    });
+    }).populate('client');
     return order;
   } catch (e) {
     throw new Error(e);
