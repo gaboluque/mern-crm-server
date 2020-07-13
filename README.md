@@ -5,6 +5,14 @@ Some own adaptations for cleaner code
 
 It's meant to work with the mern-csm-client project as a frontend service
 
+
+## Features
+- Authentication (JWT)
+- GraphQL Schemas & Resolvers
+- CRUD clients
+- CRUD products
+- CRUD orders
+
 ## Technologies
 
 - [Apollo Server](https://www.apollographql.com/docs/apollo-server/) 
